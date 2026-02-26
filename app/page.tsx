@@ -16,7 +16,7 @@ export default function Home() {
           Create account
         </span>
       </Link>
-      <Link href={"./books"} className="sm:mb-0 group inline-block rounded-full bg-linear-to-r from-pink-500 via-red-500 to-yellow-500 p-0.5 hover:text-white">
+      <Link href={"./books?page=0"} className="sm:mb-0 group inline-block rounded-full bg-linear-to-r from-pink-500 via-red-500 to-yellow-500 p-0.5 hover:text-white">
         <span className="block rounded-full bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent">
           List of books
         </span>
