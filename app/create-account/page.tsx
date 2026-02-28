@@ -15,7 +15,7 @@ export default function CreateAccount() {
 
   async function postAccountInfo(formdata: FormData) {
 
-    console.log((await fetch("http://localhost:8080/user")).json);
+    console.log((await fetch("http://localhost:8080/users")).json);
 
     const user: userCreationDTO = {
       email: formdata.get("email") as string,
@@ -24,7 +24,7 @@ export default function CreateAccount() {
     };
 
     try {
-      const resp: Response = await fetch("http://localhost:8080/user",
+      const resp: Response = await fetch("http://localhost:8080/users",
         {
           method: "POST",
           body: JSON.stringify(user),
