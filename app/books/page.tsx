@@ -1,5 +1,5 @@
 import BookCard from "../components/ui/BookCard";
-import { IBookCard } from "../type-definitions/Ibook";
+import { IBookCard } from "../type-definitions/book-interfaces";
 import MyPagination from "../components/ui/paginationCreator";
 import NavigationBar from "../components/common/navbar/NavBar";
 

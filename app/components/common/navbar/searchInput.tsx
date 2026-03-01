@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import SearchResultCard from "./searchResultCard";
-import { IBookCard } from "@/app/type-definitions/Ibook";
+import { IBookCard } from "@/app/type-definitions/book-interfaces";
 import { debounce } from "lodash";
 import { useRef } from "react";
 

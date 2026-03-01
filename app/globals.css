@@ -27,7 +27,21 @@ html {
 main{
   min-height: 100vh;
 }
-.green-glass-effect{
+ 
+
+.green-glass-effect {
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    background: #37985b75;
+    border: 1px solid #00000033;
+    padding: .5rem;
+    overflow: hidden;
+    box-shadow: -16px -9px 30px #00000040, inset 0 0 4px 2px #00000000;
+}
+body {
+min-height: 100vh;
+}
+
+/*.green-glass-effect{
     background: rgba(6, 78, 59, 0.18);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
@@ -36,6 +50,4 @@ main{
     overflow: hidden;
     padding: 0.5rem;
 }
-body {
-min-height: 100vh;
-}
+*/

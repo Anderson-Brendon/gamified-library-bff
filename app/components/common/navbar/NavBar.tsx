@@ -2,7 +2,7 @@ import SearchInput from "./searchInput";
 
 export default function NavigationBar() {
     return (
-        <nav className="flex justify-around items-center flex-wrap pt-6">
+        <nav className="flex justify-around items-center flex-wrap pt-6 mb-4">
             <div className="mb-4 sm:mb">
                 <SearchInput />
             </div>
