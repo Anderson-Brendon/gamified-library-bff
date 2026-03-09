@@ -1,56 +1,21 @@
-'use client';
+import { cookies } from "next/headers";
+import { tryLogin } from "./action";
+import { redirect } from "next/navigation";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-interface login {
-  username: string,
-  password: string
-}
+export default async function Login() {
 
-export default function Login() {
+  const clientCookies = await cookies();
 
-  const [loginResult, setLoginResult] = useState(null);
-
-  const router = useRouter();
-
-  async function tryLogin(formdata: FormData) {
-
-    const user: login = {
-      username: formdata.get("username") as string,
-      password: formdata.get("password") as string
-    }
-
-    try {
-      const response = await fetch("http://localhost:8080/auth/login",
-        {
-          method: "POST",
-          body: JSON.stringify(user),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-      const responseBody = await response.json()
-      if (response.ok) {
-        await cookieStore.set("token", responseBody.token)
-        const cookieValue = await cookieStore.get("token")
-        console.log(cookieValue?.value)
-        router.push("/books")
-      }else{
-        setLoginResult(responseBody.exception)
-      }
-
-    } catch (error) {
-      console.log(error)
-    }
-
+  if (clientCookies.has("token")) {
+    redirect("/books") ;
   }
 
   return (
     <main className="flex flex-col justify-center items-center">
       <header className="text-center">
         <h1 className="text-3xl">Login</h1>
-        <p>{loginResult ?? ""}</p>
+        <p>{clientCookies.has("loginFailed") ? "Login attempt failed, try again" : ""}</p>
       </header>
       <form action={tryLogin} className="mx-auto max-w-md space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6">
         <div>
