@@ -1,15 +1,14 @@
 import { cookies } from "next/headers";
 import { tryLogin } from "./action";
-import { redirect } from "next/navigation";
 
 
 export default async function Login() {
 
   const clientCookies = await cookies();
 
-  if (clientCookies.has("token")) {
+  /*if (clientCookies.has("token")) {
     redirect("/books") ;
-  }
+  }*/
 
   return (
     <main className="flex flex-col justify-center items-center">
