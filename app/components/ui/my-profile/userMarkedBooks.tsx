@@ -1,8 +1,9 @@
 'use client'
 
-import FavoriteBooks from "./favoriteBooks"
-import UserReadingList from "./readingList"
-import UserCompletedBooks from "./userCompletedBooks"
+import FavoriteBooks from "../../common/user-books/userFavoriteBooks"
+import UserReadingList from "../../common/user-books/readingList"
+import UserCompletedBooks from "../../common/user-books/userCompletedBooks"
+import UserFavoriteBooks from "../../common/user-books/userFavoriteBooks"
 
 export default function UserMarkedBooks({ id }: { id: number }) {
     return (
@@ -14,7 +15,7 @@ export default function UserMarkedBooks({ id }: { id: number }) {
                 <UserCompletedBooks userId={id} />
             </div>
             <div className="mb-4">
-                <FavoriteBooks userId={id} />
+                <UserFavoriteBooks userId={id} />
             </div>
         </div>)
 }

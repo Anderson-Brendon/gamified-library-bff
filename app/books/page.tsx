@@ -35,7 +35,9 @@ export default async function BooksList({
     <NavigationBar />
       <section className="flex flex-wrap justify-around sm:justify-center sm:m-12 mt-15">
          {books.map(book =>
+         <a key={book.id} className="mt-3 mb-3 sm:mr-4" href={`book/${book.slug}/${book.id}`}>
           <BookCard key={book.id} book={book}/>
+         </a>
           )}
       </section>
       <nav className="flex justify-center mb-9 mt-9">
@@ -43,3 +45,5 @@ export default async function BooksList({
       </nav>
    </main>)
 }//<PaginationCreator currentPage={params.page || 0} totalPages={booksInfo.totalPages} />
+
+/*<a className="mt-3 mb-3 sm:mr-4" href={`book/${book.slug}/${book.id}`}> */
