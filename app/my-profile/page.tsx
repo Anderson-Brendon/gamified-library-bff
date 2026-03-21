@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { UserInfo } from "../type-definitions/user";
 import NavigationBar from "../components/common/navbar/NavBar";
 import { ProfilePictureUploader } from "./profilePictureUploader";
+import Link from "next/link";
 
 async function fetchUserById(id: number) {
     try {
@@ -40,7 +41,7 @@ export default async function MyProfile() {
                     <p>Total quiz score: </p>
                     <p>Answered quizzes: </p>
                 </div>
-                <a className={"mb-4 border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0"}>
+                <a href="/my-profile/reading-list" className={"mb-4 border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0"}>
                     Reading List
                 </a>
                 <a href={`/my-profile/favorites`} className={"mb-4 border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0"}>

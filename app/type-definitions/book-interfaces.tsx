@@ -22,3 +22,12 @@ export interface IBookCard {
     cover: string,
     slug: string
 }
+
+export interface IBookOnReadingList {
+    id: number,
+    title: string,
+    cover: string,
+    slug: string,
+    currentPage: number,
+    isComplete: boolean
+}
