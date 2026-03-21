@@ -17,10 +17,10 @@ async function fetchBooksOnReadingListByUserId(id: number, completed = false) {
 }
 
 //deletar somente se não foi completado
-async function deleteOnListByBookId(bookId: number) {
+async function deleteFromListByBookId(bookId: number) {
     try {
 
-        const response: Response = await fetch(`http://localhost:3000/api/users/favorites/${bookId}`, {
+        const response: Response = await fetch(`http://localhost:3000/api/users/reading-list/${bookId}`, {
             method: "DELETE"
         })
 
@@ -35,8 +35,9 @@ export default function UserReadingList({ userId, isOwner }: { userId: number, i
 
     const [userBooks, setUserBooks] = useState<IBookOnReadingList[]>([]);
 
-    const handleBookRemove = async (bookId: number) => {
-        const isRemoved = await deleteOnListByBookId(bookId);
+    const handleBookRemoving = async (bookId: number) => {
+        const isRemoved = await deleteFromListByBookId(bookId);
+
         if (isRemoved) {
             setUserBooks(userBooks.filter(book =>
                 //manter apenas os objetos que não possuem essa id
@@ -67,7 +68,7 @@ export default function UserReadingList({ userId, isOwner }: { userId: number, i
                         </a>
                         {isOwner && <div>
                             <button>✅</button>
-                            <button>❌</button>
+                            <button onClick={() => {handleBookRemoving(book.id)}}>❌</button>
                         </div>}
                     </div>
                 )}

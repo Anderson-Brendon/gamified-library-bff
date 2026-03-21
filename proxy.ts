@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { getPayloadFromJWT } from './app/services/JWTService';
 
 //lista de rotas que precisam de autenticação
-const authRoutes = {myProfile: "/my-profile/"};
+const authRoutes = {myProfile: "/my-profile"};
 
 //lista de rotas apenas para usuários guest
 const guestRoutes = {root: '/', login: '/login', createAccount:'/create-account'};
