@@ -7,7 +7,7 @@ import { debounce } from "lodash";
 import { nextApiDomain, springApiDomain } from "@/app/domains";
 
 //buscar somentar não completados
-async function fetchBooksOnReadingListByUserId(id: number, completed = false) {
+export async function fetchBooksOnReadingListByUserId(id: number, completed = false) {
     try {
         const response: Response = await fetch(`${springApiDomain}/users/reading-list/${id}?completed=${completed}`)
         const favorites: IBookOnReadingList[] | [] = await response.json();
