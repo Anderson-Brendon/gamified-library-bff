@@ -14,6 +14,7 @@ export default interface IBook {
         id: number,
         name: string
     }
+    averageRating: number
 }
 
 export interface IBookCard {

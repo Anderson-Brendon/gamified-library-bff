@@ -1,6 +1,7 @@
 import NavigationBar from "@/app/components/common/navbar/NavBar";
 import { Reviews } from "@/app/components/ui/review/reviews";
 import IBook from "@/app/type-definitions/book-interfaces";
+import Rating from "@mui/material/Rating";
 
 async function fetchBook(id: number): Promise<IBook> {
     try {
@@ -33,6 +34,10 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                 </span>
             </header>
             <section id="book-info" className="flex flex-col justify-center">
+                <div className="flex flex-col items-center ">
+                    <Rating size={"large"} value={book.averageRating} precision={0.1} readOnly />
+                    <p>{book.averageRating === 0 ? "No ratings yet" : book.averageRating.toFixed(2)}</p>
+                </div>
                 <img src={book.cover} className="self-center" />
                 <div className={"mb-4 mt-8"}>
                     <details className="group border-2 border-black shadow-[4px_4px_0_0] [&amp;_summary::-webkit-details-marker]:hidden" open={false}>
