@@ -1,7 +1,10 @@
 import NavigationBar from "@/app/components/common/navbar/NavBar";
+import ReadingListToggle from "@/app/components/ui/book-interaction/readingListToggle";
 import { Reviews } from "@/app/components/ui/review/reviews";
+import { springApiDomain } from "@/app/domains";
 import IBook from "@/app/type-definitions/book-interfaces";
 import Rating from "@mui/material/Rating";
+import { headers } from "next/headers";
 
 async function fetchBook(id: number): Promise<IBook> {
     try {
@@ -21,6 +24,10 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
 
     const book: IBook = await fetchBook(id);
 
+    const clientHeaders = await headers();
+    
+    const userId = parseInt(clientHeaders.get("x-user-id")!);
+
     return (
         <main>
             <header className="mb-4">
@@ -39,6 +46,9 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                     <p>{book.averageRating === 0 ? "No ratings yet" : book.averageRating.toFixed(2)}</p>
                 </div>
                 <img src={book.cover} className="self-center" />
+                <div className="flex justify-around mt-4">
+                    <ReadingListToggle bookId={book.id} userId={userId}/>
+                </div>
                 <div className={"mb-4 mt-8"}>
                     <details className="group border-2 border-black shadow-[4px_4px_0_0] [&amp;_summary::-webkit-details-marker]:hidden" open={false}>
                         <summary className="flex cursor-pointer items-center justify-between gap-4 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-yellow-100 focus:bg-yellow-100 focus:outline-0">

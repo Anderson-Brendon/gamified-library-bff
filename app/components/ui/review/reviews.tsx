@@ -37,8 +37,8 @@ export function Reviews({ bookId }: { bookId: number }) {
     const slicedReviews = reviews.slice(paginationValues.start, paginationValues.stop)
 
     return (
-        <div id="book-reviews" className="mt-8">
-            <button disabled={reviews.length > 0} type={"button"} onClick={handleReviewsFetching} className="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-300 focus:outline-0">
+        <div id="book-reviews" className="mt-8 flex flex-col justify-center">
+            <button disabled={reviews.length > 0} type={"button"} onClick={handleReviewsFetching} className="w-1/2 self-center border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-300 focus:outline-0">
                 Check reviews
             </button>
             <div className="flex flex-col align-start m-4">

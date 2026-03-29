@@ -18,7 +18,7 @@ export async function fetchBooksOnReadingListByUserId(id: number, completed = fa
     }
 }
 
-async function deleteFromListByBookId(bookId: number) {
+export async function deleteFromListByBookId(bookId: number) {
     try {
 
         const response: Response = await fetch(`${nextApiDomain}/api/users/reading-list/${bookId}`, {
