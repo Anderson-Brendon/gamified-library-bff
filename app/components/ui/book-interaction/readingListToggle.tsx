@@ -55,5 +55,5 @@ export default function ReadingListToggle({ bookId, userId }: { bookId: number, 
        }
     }
 
-    return (<ToggleButton clickHandler={() => isOnReadingList ? handleBookRemoving(bookId) : handleBookAddition(bookId)} isOnList={isOnReadingList} onListText="Remove from Reading List" outOfListText="Add to reading list" />)
+    return (<ToggleButton disabled={false} clickHandler={() => isOnReadingList ? handleBookRemoving(bookId) : handleBookAddition(bookId)} isOnList={isOnReadingList} onListText="Remove from Reading List" outOfListText="Add to reading list" />)
 }

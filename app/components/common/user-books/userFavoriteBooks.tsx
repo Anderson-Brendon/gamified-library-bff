@@ -16,7 +16,7 @@ async function fetchFavoriteBooksByUserId(id: number) {
 }
 
 //api vai deletar usando o id que vier no token
-async function deleteFavoriteByBookId(bookId: number) {
+export async function deleteFavoriteByBookId(bookId: number) {
     try {
 
         const response: Response = await fetch(`http://localhost:3000/api/users/favorites/${bookId}`, {

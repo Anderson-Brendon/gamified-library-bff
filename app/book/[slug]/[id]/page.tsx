@@ -1,4 +1,7 @@
 import NavigationBar from "@/app/components/common/navbar/NavBar";
+import { deleteFavoriteByBookId } from "@/app/components/common/user-books/userFavoriteBooks";
+import FavoriteToggle from "@/app/components/ui/book-interaction/favoriteToggle";
+import FavoriteBookToggle from "@/app/components/ui/book-interaction/favoriteToggle";
 import ReadingListToggle from "@/app/components/ui/book-interaction/readingListToggle";
 import { Reviews } from "@/app/components/ui/review/reviews";
 import { springApiDomain } from "@/app/domains";
@@ -8,7 +11,7 @@ import { headers } from "next/headers";
 
 async function fetchBook(id: number): Promise<IBook> {
     try {
-        const response: Response = await fetch(`http://192.168.1.11:8080/books/${id}`);
+        const response: Response = await fetch(`${springApiDomain}/books/${id}`);
         const book: IBook = await response.json();
         return book;
     } catch (e) {
@@ -48,6 +51,7 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                 <img src={book.cover} className="self-center" />
                 <div className="flex justify-around mt-4">
                     <ReadingListToggle bookId={book.id} userId={userId}/>
+                    <FavoriteToggle bookId={book.id} userId={userId} />
                 </div>
                 <div className={"mb-4 mt-8"}>
                     <details className="group border-2 border-black shadow-[4px_4px_0_0] [&amp;_summary::-webkit-details-marker]:hidden" open={false}>
