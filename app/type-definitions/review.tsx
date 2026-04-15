@@ -6,3 +6,8 @@ export interface IReview {
     comment: string,
     rate: number
 }
+
+export interface IReviewUpload {
+    comment: string,
+    rate: number
+}

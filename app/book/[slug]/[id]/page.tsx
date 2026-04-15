@@ -1,13 +1,13 @@
 import NavigationBar from "@/app/components/common/navbar/NavBar";
-import { deleteFavoriteByBookId } from "@/app/components/common/user-books/userFavoriteBooks";
 import FavoriteToggle from "@/app/components/ui/book-interaction/favoriteToggle";
-import FavoriteBookToggle from "@/app/components/ui/book-interaction/favoriteToggle";
 import ReadingListToggle from "@/app/components/ui/book-interaction/readingListToggle";
 import { Reviews } from "@/app/components/ui/review/reviews";
 import { springApiDomain } from "@/app/domains";
 import IBook from "@/app/type-definitions/book-interfaces";
 import Rating from "@mui/material/Rating";
 import { headers } from "next/headers";
+import ReviewHandler from "@/app/book/[slug]/[id]/user-review-manipulation/userReviewManager";
+import UserReviewManager from "@/app/book/[slug]/[id]/user-review-manipulation/userReviewManager";
 
 async function fetchBook(id: number): Promise<IBook> {
     try {
@@ -28,7 +28,7 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
     const book: IBook = await fetchBook(id);
 
     const clientHeaders = await headers();
-    
+
     const userId = parseInt(clientHeaders.get("x-user-id")!);
 
     return (
@@ -50,7 +50,8 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                 </div>
                 <img src={book.cover} className="self-center" />
                 <div className="flex justify-around mt-4">
-                    <ReadingListToggle bookId={book.id} userId={userId}/>
+                    <ReadingListToggle bookId={book.id} userId={userId} />
+                    <UserReviewManager bookId={book.id} userId={userId} />
                     <FavoriteToggle bookId={book.id} userId={userId} />
                 </div>
                 <div className={"mb-4 mt-8"}>
