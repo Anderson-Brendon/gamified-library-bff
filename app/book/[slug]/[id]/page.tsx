@@ -8,6 +8,7 @@ import Rating from "@mui/material/Rating";
 import { headers } from "next/headers";
 import ReviewHandler from "@/app/book/[slug]/[id]/user-review-manipulation/userReviewManager";
 import UserReviewManager from "@/app/book/[slug]/[id]/user-review-manipulation/userReviewManager";
+import { PfdDownloader } from "./pdf-downloader/pdfDownloader";
 
 async function fetchBook(id: number): Promise<IBook> {
     try {
@@ -49,7 +50,16 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                     <p>{book.averageRating === 0 ? "No ratings yet" : book.averageRating.toFixed(2)}</p>
                 </div>
                 <img src={book.cover} className="self-center" />
-                <div className="flex justify-around mt-4">
+                <div className="flex justify-around mt-4 items-center">
+                    <a className="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0" href={book.pdf}>
+                        Read
+                    </a>
+                    <button className="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0">
+                        Answer quiz
+                    </ button>
+                    <PfdDownloader pdfName={book.title} pdfUrl={book.pdf} />
+                </div>
+                <div className="flex justify-around mt-4 items-center" inert={userId ? false : true}>
                     <ReadingListToggle bookId={book.id} userId={userId} />
                     <UserReviewManager bookId={book.id} userId={userId} />
                     <FavoriteToggle bookId={book.id} userId={userId} />
