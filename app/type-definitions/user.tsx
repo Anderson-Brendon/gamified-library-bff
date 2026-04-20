@@ -1,6 +1,10 @@
 export interface UserInfo {
     id: number,
-    username: string,
+    userName: string,
     profilePic: string,
-    email: string
+    email: string,
+    totalQuizPoints : number,
+    totalRandomAnswersChoosed : number,
+    totalCorrectAnswers : number, 
+    completedQuizzes : number
 }
