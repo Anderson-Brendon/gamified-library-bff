@@ -11,7 +11,7 @@ export interface QuizQuestion {
 export interface UserAnswer{
     questionId: number,
     randomSelection: boolean,
-    choosedOption: string,
+    selectedOption: string,
     correctOption: string,
 }
 
