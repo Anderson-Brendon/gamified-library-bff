@@ -19,4 +19,5 @@ export interface QuizResult{
     randomAnswers: number
     correctAnswers: number,
     points: number,
+    completedAt: string
 }
