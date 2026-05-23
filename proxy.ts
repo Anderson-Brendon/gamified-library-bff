@@ -14,13 +14,17 @@ const guestRoutes = {root: '/', login: '/login', createAccount:'/create-account'
 //toda solicitação vai passar por aqui
 export async function proxy(request: NextRequest) {
 
-  const nextResponse = NextResponse
-
   const token = request.cookies.get("token")?.value;
 
   const modifiedHeaders = new Headers(request.headers);
 
   console.log(token);
+
+  if(request.nextUrl.pathname === "/logout"){
+    const response = NextResponse.redirect(new URL("/", request.url));
+    response.cookies.delete("token");
+    return response;
+  }
 
   //se o usuario tiver um token, capture o claim id e configure um cabeçalho com valor dele
   if(token){
@@ -39,16 +43,16 @@ export async function proxy(request: NextRequest) {
     request.nextUrl.pathname === guestRoutes.createAccount
   ))
   {
-    return nextResponse.redirect(new URL("/books", request.url))
+    return NextResponse.redirect(new URL("/books", request.url))
   }
 
   //redirecionamento usuarios guest
   if(!token && (request.nextUrl.pathname === authRoutes.myProfile))
   {
-    return nextResponse.redirect(new URL("/books", request.url))
+    return NextResponse.redirect(new URL("/books", request.url))
   }
 
-  return nextResponse.next({
+  return NextResponse.next({
       request:{
         headers: modifiedHeaders
       }
