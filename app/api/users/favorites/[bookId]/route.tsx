@@ -13,7 +13,7 @@ export async function DELETE(request: NextRequest,
 
   const token = clientCookies.get("token")?.value;
 
-    const springResponse: Response = await fetch(`http://192.168.1.11:8080/users/favorites/${bookId}`,{
+    const springResponse: Response = await fetch(`${springApiDomain}/users/favorites/${bookId}`,{
         method: 'DELETE',
         headers:{
             'Authorization': `Bearer ${token}`

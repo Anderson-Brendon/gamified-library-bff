@@ -6,9 +6,9 @@ import { springApiDomain } from "@/app/domains";
 import IBook from "@/app/type-definitions/book-interfaces";
 import Rating from "@mui/material/Rating";
 import { headers } from "next/headers";
-import ReviewHandler from "@/app/book/[slug]/[id]/user-review-manipulation/userReviewManager";
 import UserReviewManager from "@/app/book/[slug]/[id]/user-review-manipulation/userReviewManager";
 import { PfdDownloader } from "./pdf-downloader/pdfDownloader";
+import { QuizInitiator } from "./quiz/QuizInitiator";
 
 async function fetchBook(id: number): Promise<IBook> {
     try {
@@ -54,9 +54,7 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                     <a className="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0" href={book.pdf}>
                         Read
                     </a>
-                    <button className="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0">
-                        Answer quiz
-                    </ button>
+                    <QuizInitiator userId={userId} bookId={id} isLoggedIn={userId != null}/>
                     <PfdDownloader pdfName={book.title} pdfUrl={book.pdf} />
                 </div>
                 <div className="flex justify-around mt-4 items-center" inert={userId ? false : true}>

@@ -38,7 +38,6 @@ export default function FavoriteToggle({ bookId, userId }: { bookId: number, use
     //quando o componente for montado chama a função pra checar se o livro está na lista do usuário
     useEffect(() => {
         checkIfBookIsAFavorite(userId, bookId).then(json => {
-            console.log(json.isFavorite)
             setIsFavorite(json.isFavorite)
         });
     }, [userId, bookId])
