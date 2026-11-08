@@ -2,10 +2,11 @@
 
 import { springApiDomain } from "@/app/domains"
 import { IReviewUpload } from "@/app/type-definitions/review";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ReviewUploader from "./reviewUploader";
 import ReviewEditor from "./reviewEditor";
 import { Alert, Box, Modal, Snackbar } from "@mui/material";
+import toast from "react-hot-toast";
 
 async function fetchReview(bookId: number, userId: number) {
     try {
@@ -36,6 +37,10 @@ export default function UserReviewManager({ bookId, userId }: { bookId: number, 
 
     //função que alterna abertura do dialog
     const handleReviewAreaOpening = () => {
+        if(userId == 0){
+            toast.error("You must have a account to create a review 🙅")
+            return;
+        }
         setOpenModal(!openModal);
     }
 
