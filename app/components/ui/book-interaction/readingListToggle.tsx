@@ -4,6 +4,7 @@ import { nextApiDomain, springApiDomain } from "@/app/domains";
 import { deleteFromListByBookId } from "../../common/user-books/userReadingList";
 import { useEffect, useState } from "react";
 import ToggleButton from "./ToggleButton";
+import toast from "react-hot-toast";
 
 async function addBookToReadingList(bookId: number) {
     try {
@@ -16,7 +17,7 @@ async function addBookToReadingList(bookId: number) {
     }
 }
 
-async function checkIfBookExistsOnList(userId: number, bookId:number){
+async function checkIfBookExistsOnList(userId: number, bookId:number, ){
     try {
         const response: Response = await fetch(`${springApiDomain}/reading-list/${userId}/contains/${bookId}`)
         if(response.ok){
@@ -27,18 +28,26 @@ async function checkIfBookExistsOnList(userId: number, bookId:number){
     }
 }
 
-export default function ReadingListToggle({ bookId, userId }: { bookId: number, userId : number}) {
+export default function ReadingListToggleHandler({ bookId, userId}: { bookId: number, userId : number}) {
 
     const [isOnReadingList, setIsOnList] = useState(false)
 
+    const isGuest = userId === 0;
+
     //quando o componente for montado chama a função pra checar se o livro está na lista do usuário
     useEffect(() => {
-        checkIfBookExistsOnList(userId, bookId).then(json =>  {
-            console.log(json.isOnReadingList)
-            setIsOnList(json.isOnReadingList)});
-    }, [userId, bookId])
+        if(!isGuest){
+            checkIfBookExistsOnList(userId, bookId).then(json =>  {
+                console.log(json.isOnReadingList)
+                setIsOnList(json.isOnReadingList)})
+        }
+    }, [userId, bookId, isGuest])
 
     const handleBookAddition = async (bookId: number) => {
+        if(isGuest){
+            toast.error("You must create a account for this action 🙅")
+            return;
+        }
          const result = await addBookToReadingList(bookId);
          if(result){
             console.log("livro adicionado na lista");

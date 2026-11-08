@@ -1,6 +1,7 @@
+"use server"
+
 import NavigationBar from "@/app/components/common/navbar/NavBar";
 import FavoriteToggle from "@/app/components/ui/book-interaction/favoriteToggle";
-import ReadingListToggle from "@/app/components/ui/book-interaction/readingListToggle";
 import { Reviews } from "@/app/components/ui/review/reviews";
 import { springApiDomain } from "@/app/domains";
 import IBook from "@/app/type-definitions/book-interfaces";
@@ -9,6 +10,7 @@ import { headers } from "next/headers";
 import UserReviewManager from "@/app/book/[slug]/[id]/user-review-manipulation/userReviewManager";
 import { PfdDownloader } from "./pdf-downloader/pdfDownloader";
 import { QuizInitiator } from "./quiz/QuizInitiator";
+import ReadingListToggleHandler from "@/app/components/ui/book-interaction/readingListToggle";
 
 async function fetchBook(id: number): Promise<IBook> {
     try {
@@ -30,7 +32,7 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
 
     const clientHeaders = await headers();
 
-    const userId = parseInt(clientHeaders.get("x-user-id")!);
+    const userId : number  = parseInt(clientHeaders.get("x-user-id") || "0");
 
     return (
         <main>
@@ -57,8 +59,8 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                     <QuizInitiator userId={userId} bookId={id} isLoggedIn={userId != null}/>
                     <PfdDownloader pdfName={book.title} pdfUrl={book.pdf} />
                 </div>
-                <div className="flex justify-around mt-4 items-center" inert={userId ? false : true}>
-                    <ReadingListToggle bookId={book.id} userId={userId} />
+                <div className="flex justify-around mt-4 items-center" >
+                    <ReadingListToggleHandler bookId={book.id} userId={userId} />
                     <UserReviewManager bookId={book.id} userId={userId} />
                     <FavoriteToggle bookId={book.id} userId={userId} />
                 </div>
