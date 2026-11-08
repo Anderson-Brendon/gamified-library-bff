@@ -38,6 +38,7 @@ export default function UserReviewManager({ bookId, userId }: { bookId: number, 
     //função que alterna abertura do dialog
     const handleReviewAreaOpening = () => {
         if(userId == 0){
+            toast.dismiss();
             toast.error("You must have a account to create a review 🙅")
             return;
         }

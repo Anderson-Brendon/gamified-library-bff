@@ -4,6 +4,7 @@ import { nextApiDomain, springApiDomain } from "@/app/domains";
 import { useEffect, useState } from "react";
 import ToggleButton from "./ToggleButton";
 import { deleteFavoriteByBookId } from "../../common/user-books/userFavoriteBooks";
+import toast from "react-hot-toast";
 
 
 async function checkIfBookIsAFavorite(userId: number, bookId: number) {
@@ -43,6 +44,11 @@ export default function FavoriteToggle({ bookId, userId }: { bookId: number, use
     }, [userId, bookId])
 
     const handleBookAddition = async (bookId: number) => {
+        if(userId == 0){
+            toast.dismiss();
+            toast.error("You must create a account for this action 🙅");
+            return;
+        }
         setIsToggleDisabled(true)
         const result = await addBookToFavorites(bookId);
         if (result) {

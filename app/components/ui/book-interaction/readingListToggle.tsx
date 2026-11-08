@@ -45,6 +45,7 @@ export default function ReadingListToggleHandler({ bookId, userId}: { bookId: nu
 
     const handleBookAddition = async (bookId: number) => {
         if(isGuest){
+            toast.dismiss()
             toast.error("You must create a account for this action 🙅")
             return;
         }
