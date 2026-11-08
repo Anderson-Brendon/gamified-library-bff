@@ -56,7 +56,7 @@ export default async function BookInfo({ params }: { params: { id: number } }) {
                     <a className="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] hover:translate-1 hover:shadow-none focus:ring-2 focus:ring-yellow-300 focus:outline-0" href={book.pdf}>
                         Read
                     </a>
-                    <QuizInitiator userId={userId} bookId={id} isLoggedIn={userId != null}/>
+                    <QuizInitiator userId={userId} bookId={id} isLoggedIn={userId != 0}/>
                     <PfdDownloader pdfName={book.title} pdfUrl={book.pdf} />
                 </div>
                 <div className="flex justify-around mt-4 items-center" >

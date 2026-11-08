@@ -1,6 +1,13 @@
+import { cookies } from "next/headers";
 import SearchInput from "./searchInput";
 
-export default function NavigationBar() {
+
+
+export default async function NavigationBar() {
+    
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
     return (
         <nav className="flex justify-around items-center flex-wrap pt-6 mb-4">
             <div className="mb-4 sm:mb">
@@ -16,8 +23,8 @@ export default function NavigationBar() {
                     <span className="relative z-10"> My Profile</span>
                 </a>
                 
-                <a className="relative border-black bg-white px-5 py-3 font-semibold text-black after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-black hover:text-white hover:after:h-full focus:ring-2 focus:ring-yellow-300 focus:outline-0" href="/logout">
-                    <span className="relative z-10"> Logout </span>
+                <a className="relative border-black bg-white px-5 py-3 font-semibold text-black after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-black hover:text-white hover:after:h-full focus:ring-2 focus:ring-yellow-300 focus:outline-0" href={token ? "/logout" : "/login"}>
+                    <span className="relative z-10"> {token ? "Logout" : "Login"} </span>
                 </a>
         </nav>)
 }

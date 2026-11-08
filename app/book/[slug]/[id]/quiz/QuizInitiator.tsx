@@ -57,7 +57,8 @@ export function QuizInitiator({ bookId, isLoggedIn, userId }: { bookId: number, 
         try {
 
             //checa se usuário está logado
-            if (isLoggedIn) {
+            if (!isLoggedIn) {
+                toast.dismiss()
                 toast.error("You must create a account before answering the quiz 🙅");
                 return;
             }
